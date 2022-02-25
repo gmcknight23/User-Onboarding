@@ -28,7 +28,10 @@ function App() {
     axios
       .post("https://reqres.in/api/users", formValues)
       .then((res) => {
-        setUsers([res.data, ...users]);
+        const newUsers = users;
+        newUsers.push(res.data);
+        setUsers(newUsers);
+        // setUsers([res.data, ...users])
       })
       .catch((err) => console.error(err));
   };
@@ -43,7 +46,7 @@ function App() {
 
   const handleChange = (name, value) => {
     validate(name, value);
-    setFormValues({ ...formValues, [name]: value });
+    setFormValues({ formValues, [name]: value });
   };
   return (
     <div className="App">
